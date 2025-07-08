@@ -1,0 +1,901 @@
+/* Global Styles & Resets */
+:root {
+    --primary-color: #4CAF50; /* Green */
+    --secondary-color: #3498db; /* Blue */
+    --text-color: #333;
+    --text-light: #555;
+    --background-light: #f9f9f9;
+    --background-white: #ffffff;
+    --header-bg: rgba(45, 52, 54, 0.95); /* Darker, slightly less transparent */
+    --footer-bg: #2c3e50; /* Dark blue-gray */
+    --font-primary: 'Roboto', 'Arial', sans-serif;
+    --font-headings: 'Montserrat', 'Arial', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.7; /* Increased for better readability */
+    color: var(--text-color);
+    background-color: var(--background-white); /* Base background */
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* General Focus Styles for Accessibility */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--secondary-color); /* Use secondary color for a visible outline */
+    outline-offset: 2px;
+}
+/* More specific input focus style is already defined below, this is a fallback/general one */
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none; /* Remove default, use custom shadow */
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+
+/* Header */
+header {
+    background: var(--header-bg);
+    color: #fff;
+    padding: 0.8rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-family: var(--font-headings);
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    padding: 8px 10px;
+    border-radius: 4px;
+}
+
+nav ul li a:hover, nav ul li a.active-link {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Main Content & Sections */
+main {
+    /* Sections handle their own top padding due to fixed header */
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 2rem 3rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+section h2 { /* Default section heading */
+    font-family: var(--font-headings);
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem; /* Was 1.5rem, consistent */
+    color: var(--text-color);
+    font-weight: 600; /* Was 600, consistent */
+}
+
+section p { /* Default paragraph style within sections, distinct from .intro-text */
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+section .intro-text { /* Common style for specific intro paragraphs */
+    font-size: 1.15rem;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    background: var(--footer-bg);
+    color: #bdc3c7;
+    font-size: 0.9rem;
+}
+footer p {
+    margin: 0;
+}
+
+/* Portada Section Specifics */
+#portada {
+    background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+    color: #004d40;
+}
+
+#portada h1 { /* This is the main large title on Portada */
+    font-family: var(--font-headings);
+    font-size: 3.8rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    color: #006064;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+/* Style for the main descriptive paragraph in Portada */
+#portada > .container > p.stagger-child.intro-text {
+    font-size: 1.4rem; /* Larger than other intro-texts */
+    color: #00796b;
+    font-weight: 400;
+    margin-top: 0.5rem; /* Add some space below the H1 */
+}
+
+
+.logo-container {
+    margin-bottom: 25px;
+}
+
+#animated-logo {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.8s ease-out;
+}
+#portada.is-visible #animated-logo {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+    transition-delay: 0.3s; /* Slightly delay logo after section appears */
+}
+#animated-logo circle {
+    animation: stroke-draw 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 0.5s; /* Smoother ease, delayed start */
+    stroke-dasharray: 251.2;
+    stroke-dashoffset: 251.2;
+    stroke: var(--secondary-color);
+    stroke-width: 6;
+}
+#animated-logo path {
+    animation: fill-fade-in 1.5s ease-out 1.5s forwards; /* Delayed to start after circle animation */
+    opacity: 0;
+    fill: var(--primary-color);
+}
+@keyframes stroke-draw { to { stroke-dashoffset: 0; } }
+@keyframes fill-fade-in { to { opacity: 1; } }
+
+/* Other Section Backgrounds */
+#servicios { background-color: var(--background-white); }
+#portfolio { background-color: var(--background-light); }
+#testimonios { background-color: var(--background-white); }
+#contacto { background-color: var(--background-light); }
+
+
+/* Animation Core Styles - Refined */
+.animated-item {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+.fade-in-effect.is-visible { opacity: 1; }
+
+.slide-up-effect { transform: translateY(60px); } /* Adjusted default distance */
+.slide-up-effect.is-visible { opacity: 1; transform: translateY(0); }
+
+.zoom-in-effect { transform: scale(0.85); } /* Adjusted default scale */
+.zoom-in-effect.is-visible { opacity: 1; transform: scale(1); }
+
+.stagger-child {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(20px); /* Standardized stagger distance */
+}
+.is-visible .stagger-child { opacity: 1; transform: translateY(0); }
+/* Stagger delays - slightly adjusted for rhythm */
+.is-visible .stagger-child:nth-child(1) { transition-delay: 0.15s; }
+.is-visible .stagger-child:nth-child(2) { transition-delay: 0.30s; }
+.is-visible .stagger-child:nth-child(3) { transition-delay: 0.45s; }
+.is-visible .stagger-child:nth-child(4) { transition-delay: 0.60s; }
+.is-visible .stagger-child:nth-child(5) { transition-delay: 0.75s; }
+
+
+/* Servicios Section Styling */
+#servicios .intro-text { /* This selector is fine if used in HTML */
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+    max-width: 800px;
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem; /* Increased gap */
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 2rem;
+}
+
+.servicio-item {
+    background: var(--background-white);
+    padding: 2.5rem 2rem; /* Increased padding */
+    border-radius: 10px; /* More rounded corners */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07); /* Softer shadow */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e8e8e8; /* Subtle border */
+}
+
+.servicio-item:hover {
+    transform: translateY(-12px); /* More lift */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.servicio-icon {
+    margin-bottom: 1.2rem; /* More space */
+    color: var(--primary-color);
+}
+
+.servicio-icon svg {
+    width: 55px; /* Slightly larger */
+    height: 55px;
+    stroke-width: 1.5;
+}
+
+.servicio-item h3 {
+    font-family: var(--font-headings);
+    font-size: 1.6rem; /* Slightly larger */
+    color: var(--text-color);
+    margin-bottom: 0.8rem; /* More space */
+    font-weight: 600;
+}
+
+.servicio-item p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.8; /* Better readability */
+}
+
+/* Portfolio Section Styling */
+#portfolio .intro-text { /* Covered by general section .intro-text if class is applied */
+    /* font-size: 1.2rem; */ /* No change needed if using general */
+    /* color: var(--text-light); */ /* No change needed if using general */
+    margin-bottom: 3rem; /* More space before filter buttons */
+    /* max-width: 800px; */ /* No change needed if using general */
+}
+
+.portfolio-filter {
+    margin-bottom: 3rem; /* Increased space */
+    text-align: center;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.8rem 1.8rem; /* Increased padding */
+    margin: 0.3rem 0.6rem; /* Spacing for wrapping */
+    border-radius: 30px; /* More rounded */
+    cursor: pointer;
+    font-weight: 600; /* Bolder */
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase; /* Uppercase text */
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary-color);
+    color: #fff;
+    transform: scale(1.05) translateY(-1px); /* Added Y transform for depth */
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly larger items */
+    gap: 2.5rem; /* Increased gap */
+    width: 100%;
+}
+
+.portfolio-item {
+    background: var(--background-white);
+    border-radius: 10px; /* More rounded */
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* Refined shadow */
+    transition: transform 0.35s ease, box-shadow 0.35s ease; /* Smoother transition */
+    position: relative;
+    border: 1px solid #e0e0e0; /* Subtle border */
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px) scale(1.03); /* Enhanced hover effect */
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+.portfolio-item:hover .portfolio-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.portfolio-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 10; /* Common aspect ratio */
+    object-fit: cover;
+    transition: transform 0.4s ease; /* Smooth zoom for image */
+}
+.portfolio-item:hover img {
+    transform: scale(1.08); /* More pronounced image zoom on item hover */
+}
+
+.portfolio-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)); /* Gradient caption */
+    color: #fff;
+    padding: 1.5rem 1.2rem; /* More padding */
+    text-align: left;
+    opacity: 0;
+    transform: translateY(30px); /* Start further down for smoother entry */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.portfolio-caption h3 {
+    font-family: var(--font-headings);
+    font-size: 1.3rem; /* Larger caption title */
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.portfolio-caption p {
+    font-size: 0.9rem; /* Slightly larger caption text */
+    margin-bottom: 0;
+    color: #e0e0e0; /* Lighter text for caption paragraph */
+}
+
+/* Client Logos */
+.clients-title {
+    font-family: var(--font-headings);
+    margin-top: 4.5rem; /* More space */
+    margin-bottom: 2rem; /* More space */
+    font-size: 2rem; /* Larger */
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.clients-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem 3rem; /* Row and column gap */
+    padding: 1rem 0;
+}
+
+.client-logo {
+    max-height: 65px; /* Slightly larger */
+    width: auto;
+    opacity: 0.65; /* Slightly less opacity for subtlety */
+    transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease; /* Added filter transition */
+    filter: grayscale(60%); /* Slightly desaturate for a cleaner look */
+}
+
+.client-logo:hover {
+    opacity: 1;
+    transform: scale(1.12); /* More pronounced hover scale */
+    filter: grayscale(0%); /* Full color on hover */
+}
+
+/* CSS for filtering (JS will handle the logic) */
+.portfolio-item.hide {
+    display: none; /* Simple hide, could be animated out with more JS */
+}
+
+/* Testimonios Section Styling */
+#testimonios .intro-text { /* Covered by general section .intro-text */
+    margin-bottom: 3rem; /* Consistent */
+}
+
+.testimonios-slider {
+    position: relative;
+    max-width: 750px; /* Slightly wider */
+    margin: 0 auto 2rem auto;
+    overflow: hidden;
+    min-height: 320px; /* Adjusted height */
+    background: var(--background-light); /* Use light bg for slider */
+    padding: 2rem 1.5rem; /* Increased padding */
+    border-radius: 10px; /* More rounded */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06); /* Softer shadow */
+}
+
+.testimonio-slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem; /* Inner padding for content */
+    animation: fadeInTestimonial 0.7s ease-in-out;
+}
+
+.testimonio-slide.active {
+    display: flex;
+}
+
+@keyframes fadeInTestimonial {
+    from { opacity: 0.2; transform: scale(0.95) translateY(10px); } /* Softer entry */
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.testimonio-img {
+    width: 110px; /* Larger image */
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.8rem; /* More space */
+    border: 5px solid var(--background-white); /* White border for contrast */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15); /* Refined shadow */
+}
+
+.testimonio-texto {
+    font-size: 1.2rem; /* Slightly larger */
+    font-style: italic;
+    color: var(--text-color);
+    line-height: 1.9; /* More line height for readability */
+    margin-bottom: 1.5rem; /* More space */
+    quotes: "“" "”" "‘" "’";
+    position: relative;
+    max-width: 90%; /* Ensure quotes don't overflow on smaller slider widths */
+}
+
+.testimonio-texto::before, .testimonio-texto::after {
+    font-family: 'Georgia', serif; /* More traditional quote font */
+    font-size: 3.5rem; /* Larger quotes */
+    color: var(--primary-color);
+    position: absolute;
+    opacity: 0.4; /* Softer opacity */
+    line-height: 0.8; /* Adjust line height for quotes */
+}
+.testimonio-texto::before { content: open-quote; left: -20px; top: -15px; }
+.testimonio-texto::after { content: close-quote; right: -20px; bottom: -25px; }
+
+
+.testimonio-autor {
+    font-family: var(--font-headings);
+    font-weight: 600; /* Bolder author */
+    color: var(--text-light);
+    font-size: 1.05rem; /* Slightly larger */
+    margin-top: 0.5rem;
+}
+
+.slider-controls {
+    text-align: center;
+    margin-top: 1.5rem; /* Space above buttons */
+}
+
+.slider-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    /* padding: 0.8rem 1.2rem; */ /* Padding is implicit with width/height and flex centering */
+    margin: 0 0.6rem; /* More margin */
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.3rem; /* Larger icon size */
+    line-height: 1; /* Ensure icon is centered */
+    width: 55px; /* Larger button */
+    height: 55px;
+    display: inline-flex; /* For centering icon */
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Subtle shadow */
+}
+
+.slider-btn:hover {
+    background: #388E3C; /* Darker primary color */
+    transform: scale(1.1) translateY(-1px); /* Lift and scale */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Enhanced shadow on hover */
+}
+
+/* Contacto Section Styling */
+#contacto .intro-text { /* Covered by general section .intro-text */
+    margin-bottom: 3rem; /* Consistent */
+}
+
+.contacto-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    width: 100%;
+    max-width: 1140px; /* Consistent with container */
+    margin-top: 2rem;
+    align-items: flex-start; /* Align cards to top */
+}
+
+.contacto-form, .contacto-info {
+    flex: 1;
+    min-width: 320px; /* Min width before wrapping */
+    padding: 2.5rem 2rem; /* Increased padding for cards */
+    background: var(--background-white); /* Card background */
+    border-radius: 10px; /* More rounded */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07); /* Consistent card shadow */
+}
+
+.contacto-form h3, .contacto-info h3 {
+    font-family: var(--font-headings);
+    font-size: 2rem; /* Larger sub-headings */
+    color: var(--text-color);
+    margin-bottom: 2rem; /* More space */
+    font-weight: 600;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 1.8rem; /* More space between form groups */
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600; /* Bolder labels */
+    margin-bottom: 0.6rem; /* Space below label */
+    color: var(--text-light);
+    font-size: 0.95rem; /* Slightly larger label */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 0.9rem 1.1rem; /* More padding inside inputs */
+    border: 1px solid #d0d0d0; /* Softer border */
+    border-radius: 6px; /* Slightly more rounded */
+    font-size: 1rem;
+    font-family: var(--font-primary); /* Ensure form inputs use primary font */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #fdfdfd; /* Very light input background */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Focus ring style */
+    background: var(--background-white); /* Change background on focus */
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 140px; /* Taller textarea */
+}
+
+.btn-submit {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2.2rem; /* More padding */
+    border: none;
+    border-radius: 30px; /* Rounded button */
+    font-size: 1.05rem; /* Slightly larger */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.18); /* Refined shadow */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 0.5px; /* Letter spacing */
+}
+
+.btn-submit:hover {
+    background-color: #388E3C; /* Darker primary */
+    transform: translateY(-3px) scale(1.03); /* More pronounced hover */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.22);
+}
+
+/* Contact Info Styling */
+.contacto-info p {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* More space for icon */
+    font-size: 1.05rem;
+    color: var(--text-light);
+    margin-bottom: 1.2rem; /* More space between items */
+    line-height: 1.8;
+}
+.contacto-info p a { /* Style links in contact info */
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.contacto-info p a:hover {
+    color: var(--primary-color);
+}
+
+
+.contacto-info svg {
+    color: var(--primary-color);
+    flex-shrink: 0;
+    width: 22px; height: 22px; /* Slightly larger icons */
+}
+
+.map-placeholder {
+    margin-top: 2.5rem; /* More space */
+    border-radius: 10px; /* Rounded map */
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Refined shadow */
+    border: 1px solid #d0d0d0; /* Border for map */
+}
+
+/* Responsive adjustments for contact section */
+@media (max-width: 768px) {
+    .contacto-wrapper {
+        flex-direction: column;
+    }
+    .contacto-form, .contacto-info {
+        min-width: 100%; /* Full width on smaller screens */
+    }
+    .contacto-info h3 {
+        margin-top: 2rem; /* Add space when it stacks below form */
+    }
+}
+
+/* "Volver Arriba" Button */
+.volver-arriba-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #4CAF50;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex; /* For centering icon */
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    opacity: 0; /* Hidden by default, JS will show it */
+    transform: translateY(20px); /* Start off-screen for animation */
+    z-index: 999; /* Ensure it's above other content */
+}
+
+.volver-arriba-btn.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.volver-arriba-btn:hover {
+    background-color: #3e8e41; /* Darker green on hover */
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+.volver-arriba-btn svg {
+    width: 24px; /* Icon size */
+    height: 24px;
+}
+
+/* Scroll Progress Bar */
+#scroll-progress-bar {
+    position: fixed;
+    top: 0; /* Adjust if header is not fixed or has different height */
+    left: 0;
+    width: 0%; /* Initial width */
+    height: 5px; /* Thickness of the bar */
+    background-color: #4CAF50; /* Theme color */
+    z-index: 2000; /* Ensure it's above everything, even the header */
+    transition: width 0.1s linear; /* Smooth width change, but can be too subtle */
+}
+
+/* Adjust progress bar position if header is fixed and has a known height */
+/* For example, if header is 60px tall and fixed: */
+header.fixed-header + #scroll-progress-bar { /* Assuming you add 'fixed-header' class to header */
+    top: 60px;
+}
+/* If header is fixed, the main content already has padding-top.
+   If the progress bar is to be AT THE VERY TOP OF THE VIEWPORT,
+   then top: 0 is correct regardless of the header.
+   The current header IS fixed, so top:0 for the progress bar means it will be
+   at the absolute top of the viewport.
+*/
+
+/* Mobile Animation Optimizations */
+@media (max-width: 768px) {
+    /* Reduce slide-up distance for a less dramatic effect on smaller screens */
+    .slide-up-effect {
+        transform: translateY(30px); /* Original: 60px */
+    }
+    .slide-up-effect.is-visible {
+        transform: translateY(0);
+    }
+
+    /* Slightly reduce zoom-in scale difference */
+    .zoom-in-effect {
+        transform: scale(0.9); /* Original: 0.85 */
+    }
+    .zoom-in-effect.is-visible {
+        transform: scale(1);
+    }
+
+    /* Reduce stagger child transform distance */
+    .stagger-child {
+        transform: translateY(10px); /* Original: 20px */
+    }
+    .is-visible .stagger-child {
+        transform: translateY(0);
+    }
+
+    /* Optional: Simplify or reduce intensity of logo animation if needed */
+    /* For example, reduce rotation or scale factor */
+    #animated-logo {
+        /* If it were too heavy, could simplify here, e.g., reduce rotation */
+        /* transform: scale(0.6) rotate(0deg); */ /* Example: smaller start */
+    }
+    #portada.is-visible #animated-logo {
+        /* transform: scale(1) rotate(180deg); */ /* Example: less rotation */
+    }
+
+
+    /* Make portfolio filter buttons slightly smaller and allow wrapping */
+    .portfolio-filter {
+        margin-bottom: 2rem;
+    }
+    .filter-btn {
+        padding: 0.6rem 1.2rem;
+        margin: 0.3rem; /* Allow wrapping */
+        font-size: 0.85rem;
+    }
+
+    /* Adjust section padding for smaller screens */
+    section {
+        padding: 60px 1rem 1rem 1rem; /* Less horizontal padding */
+    }
+    section h2 {
+        font-size: 2rem; /* Smaller headings */
+    }
+    #portada h1 {
+        font-size: 2.8rem; /* Smaller main heading */
+    }
+
+    /* Testimonial text size */
+    .testimonio-texto {
+        font-size: 1.05rem;
+    }
+    .testimonio-texto::before, .testimonio-texto::after {
+        font-size: 2.5rem; /* Smaller quote marks */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further reduce animation intensity for very small screens if necessary */
+    .slide-up-effect {
+        transform: translateY(20px);
+    }
+    .stagger-child {
+        transform: translateY(5px);
+    }
+     /* Example: Disable staggering for some elements if too much */
+    .is-visible .stagger-child:nth-child(n+4) { /* For example, if there are many service items */
+        /* transition-delay: 0s !important; */ /* Could disable delay for later items */
+    }
+
+    /* Header adjustments for very small screens */
+    header {
+        padding: 0.8rem 1rem;
+    }
+    header h1 {
+        font-size: 1.5rem;
+    }
+    nav ul li {
+        margin: 0 8px;
+    }
+    nav ul li a {
+        font-size: 0.9rem;
+    }
+
+    /* Reduce font sizes more */
+    section h2 {
+        font-size: 1.8rem;
+    }
+    #portada h1 {
+        font-size: 2.2rem;
+    }
+    section p, #servicios .intro-text, #portfolio .intro-text, #testimonios .intro-text, #contacto .intro-text {
+        font-size: 0.95rem;
+    }
+
+    .servicio-item h3 {
+        font-size: 1.3rem;
+    }
+    .servicio-item p {
+        font-size: 0.9rem;
+    }
+
+    .portfolio-caption h3 {
+        font-size: 1rem;
+    }
+    .portfolio-caption p {
+        font-size: 0.8rem;
+    }
+
+    .btn-submit, .filter-btn { /* Smaller buttons */
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+    .slider-btn { /* Smaller slider buttons */
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    /* Contact form inputs */
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.9rem;
+    }
+}
